@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="coords" class="ru.specialist.lab11.Coords" scope="prototype">
+        <!-- collaborators and configuration for this bean go here -->
+    </bean>
+    <bean id="point" class="ru.specialist.lab11.Point" scope="prototype">
+        <constructor-arg index="0" ref="coords"/>
+    </bean>
+    <bean id="circle" class="ru.specialist.lab11.Circle" scope="prototype">
+        <!-- collaborators and configuration for this bean go here -->
+        <constructor-arg index="0" ref="coords"/>
+        <constructor-arg index="1" value="10"/>
+    </bean>
+    <bean id="scene" class="ru.specialist.lab11.Scene" scope="singleton">
+        <property name="objects">
+            <list>
+                <bean class="ru.specialist.lab11.Point">
+                    <constructor-arg ref="coords"/>
+                    <property name="x" value="10"/>
+                    <property name="y" value="25"/>
+                </bean>
+                <bean class="ru.specialist.lab11.Circle">
+                    <constructor-arg index="0" ref="coords"/>
+                    <constructor-arg index="1" value="56"/>
+                    <property name="x" value="39"/>
+                    <property name="y" value="85"/>
+                </bean>
+                <bean class="ru.specialist.lab11.Point">
+                    <constructor-arg ref="coords"/>
+                    <property name="x" value="27"/>
+                    <property name="y" value="48"/>
+                </bean>
+                <ref bean="circle"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
